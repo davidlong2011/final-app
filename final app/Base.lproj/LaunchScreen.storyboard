@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8150" systemVersion="15A204g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,8 +16,33 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="PCN-gj-mdA">
+                                <rect key="frame" x="168" y="188" width="265" height="209"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="265" id="3OG-h9-NdI"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wish List " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6m-a1-yc3">
+                                <rect key="frame" x="236" y="405" width="128" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="NW1-eb-NNx"/>
+                                    <constraint firstAttribute="height" constant="38" id="yFm-kT-k2g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="29"/>
+                                <color key="textColor" red="0.15076757268908117" green="0.56839674349781055" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H6m-a1-yc3" firstAttribute="top" secondItem="PCN-gj-mdA" secondAttribute="bottom" constant="8" symbolic="YES" id="5Ky-4e-3lR"/>
+                            <constraint firstItem="PCN-gj-mdA" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="168" id="8Xv-O2-HcQ"/>
+                            <constraint firstItem="H6m-a1-yc3" firstAttribute="centerX" secondItem="PCN-gj-mdA" secondAttribute="centerX" id="WQ3-zO-jeV"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="H6m-a1-yc3" secondAttribute="bottom" constant="157" id="jAl-Kc-cEA"/>
+                            <constraint firstItem="PCN-gj-mdA" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="m56-Bb-gIO"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +50,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image" width="300" height="300"/>
+    </resources>
 </document>
