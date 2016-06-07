@@ -122,6 +122,47 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
         print(userIsLoggedIn)
         self.performSegueWithIdentifier("loginView", sender: self)
         
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        
+        
+        do{
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            print(results)
+            print("nono")
+            
+            let predicate = NSPredicate(format: "signedIn == %@", "1")
+            
+            let result = (results as NSArray).filteredArrayUsingPredicate(predicate)
+            print(result)
+            print("haha")
+            
+            if (results.count > 0)
+            {
+                if(result.first != nil)
+                {
+                   for eachresult in result
+                   {
+                    var objectUser : User = eachresult as! User
+                    objectUser.setValue("0", forKey: "signedIn")
+                    print(result)
+                    print("yes")
+                    }
+                    
+                }
+                
+            }
+        }
+            
+            catch
+            {
+                print("error")
+            }
+        
+        
     }
     
     
@@ -173,6 +214,8 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
         catch{
             print("error")
         }
+        self.tableView.reloadData()
+
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -223,8 +266,7 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
         self.userIsLoggedIn = userIsLoggin
         print(userIsLoggedIn)
     }
-    
-
+   
     
     
    }

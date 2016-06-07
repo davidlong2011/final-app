@@ -38,16 +38,19 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(sender: AnyObject) {
         let username = usernameTextField.text
-        let password = usernameTextField.text
+        let password = passwordTextField.text
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: "User")
+        print("checking")
+        print(fetchRequest)
         
         
         do{
             let results = try managedContext.executeFetchRequest(fetchRequest)
+            print ("fuckkkkkkkkk")
             let predicate = NSPredicate(format: "userName == %@", username!)
 
             //let result = results.filteredArrayUsingPredicate(predicate)
@@ -57,16 +60,24 @@ class LoginViewController: UIViewController {
             {
                 if(result.first != nil)
                 {
-                var objectUser : User = result.first as! User
-                if (objectUser.userName! == username && objectUser.userPassword! == password)
-                {
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    userIsLoggedIn = true
-                    self.delegate!.set(userIsLoggedIn)
-                    print(results)
-                    print(objectUser.userName)
-                    print(objectUser.userPassword)
-                }
+                    var objectUser : User = result.first as! User
+                   
+                    if (objectUser.userName! == username && objectUser.userPassword! == password)
+                    
+                        {
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                            userIsLoggedIn = true
+                            self.delegate!.set(userIsLoggedIn)
+                            print(results)
+                            print(objectUser.userName)
+                            print(objectUser.userPassword)
+                            print(objectUser.signedIn)
+                            result.first?.setValue("1", forKey: "signedIn")
+                            print(objectUser.signedIn)
+                        }
+                    else{
+                        displayMyAlertMessage("Wrong Username/Password")
+                        }
                 }
                 else
                 {
@@ -74,6 +85,7 @@ class LoginViewController: UIViewController {
                     
                 }
             }
+            
     
         }
         catch{

@@ -60,6 +60,7 @@ class RegisterPageViewController: UIViewController {
         var newUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedContext) as NSManagedObject
         newUser.setValue(username, forKey: "userName")
         newUser.setValue(newPassword, forKey: "userPassword")
+        newUser.setValue("0", forKey: "signedIn")
         do{
             try managedContext.save()
         }
