@@ -8,9 +8,11 @@
 
 import UIKit
 import CoreData
+import Social
 
 class ListItemController: UITableViewController, addItemDelegate {
     
+   
    
     
     var listItemList = [ListItem]()
@@ -30,13 +32,37 @@ class ListItemController: UITableViewController, addItemDelegate {
         super.init(coder: aDecoder)
     }
 
+    @IBAction func facebookSharing(sender: AnyObject) {
+        var line3 = ""
+        for item in listItemList
+        {
+            line3 = line3 + "- " + (item.valueForKey("listItemName") as! String?)! + "\n"
+        }
+
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookSheet.setInitialText("This is my \((currentList!.category!.valueForKey("categoriesName") as! String?)!) list \n" +
+                "for \((currentList!.valueForKey("listName") as! String?)!): \n" +
+                line3)
+            
+            // "Date: \(formatADate(item.valueForKey("listItemDate") as! NSDate))"
+            self.presentViewController(facebookSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        
+    }
 
   
     override func viewDidLoad() {
             super.viewDidLoad()
             
             listItemList = (currentList?.getListItem())!
-        
+       
+ 
             
         
     }

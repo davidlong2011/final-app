@@ -11,6 +11,9 @@ import UIKit
 import Foundation
 import CoreData
 import CoreLocation
+import Social
+
+
 
 protocol addItemDelegate
 {
@@ -203,7 +206,34 @@ class AddItemController: UIViewController, UINavigationControllerDelegate, UIIma
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+   // "This is some text \n" +
+   // "over multiple lines"
+    
+    @IBAction func shareFacebook(sender: AnyObject) {
+        let date = formatADate(dateText.date)
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookSheet.setInitialText("This is the list you have just created \n" +
+                "Title: " + titleText.text! + "\n" +
+                "Description: " + descriptionText.text! + "\n" +
+                "This list is created at: \(date)")
+            
+            // "Date: \(formatADate(item.valueForKey("listItemDate") as! NSDate))"
+            self.presentViewController(facebookSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
 
+    }
+    
+    func formatADate(date: NSDate) -> String
+    {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        return dateFormatter.stringFromDate(date)
+    }
 
     
     

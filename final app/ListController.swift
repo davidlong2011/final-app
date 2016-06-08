@@ -32,30 +32,6 @@ class ListController: UITableViewController {
         
         
         
-        //NSLog("\(currentCategory!.getList())")
-        
-        
-        /*
-        
-        let fetchRequest = NSFetchRequest(entityName: "List")
-        
-        do{
-            let results = try managedContext.executeFetchRequest(fetchRequest)
-            listList = results as! [NSManagedObject]
-            if self.listList.count == 0
-            {
-                self.saveList("Monday")
-                self.saveList("TuesDay")
-                self.saveList("Wednesday")
-            }
-            
-            
-        }
-        catch{
-            print("error")
-        }*/
-        
-        
     }
     
     

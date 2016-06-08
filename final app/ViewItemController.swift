@@ -116,6 +116,10 @@ class ViewItemController: UIViewController,UINavigationControllerDelegate, MKMap
             controller.photoToView = (self.photoList?.objectAtIndex(indexPath!.row) as? UIImage)!
         }
     }
+    
+    
+    
+    
 
     
     
