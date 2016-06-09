@@ -27,6 +27,56 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        
+        
+        do{
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            
+            
+            let predicate = NSPredicate(format: "signedIn == %@", "1")
+            
+            let result = (results as NSArray).filteredArrayUsingPredicate(predicate)
+            print(result)
+            print("haha")
+            
+            if (results.count > 0)
+            {
+                if(result.first != nil)
+                {
+                    for eachresult in result
+                    {
+                        var objectUser : User = eachresult as! User
+                        objectUser.setValue("0", forKey: "signedIn")
+                        print(result)
+                        print("yes")
+                    }
+                    
+                }
+                
+            }
+        }
+            
+        catch
+        {
+            print("error")
+        }
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -50,7 +100,6 @@ class LoginViewController: UIViewController {
         
         do{
             let results = try managedContext.executeFetchRequest(fetchRequest)
-            print ("fuckkkkkkkkk")
             let predicate = NSPredicate(format: "userName == %@", username!)
 
             //let result = results.filteredArrayUsingPredicate(predicate)

@@ -102,7 +102,7 @@ class ProfileViewController: UIViewController,UINavigationControllerDelegate, UI
             
             userNameLabel.text = objectUser.userName
             
-            userNameLabel2.text = objectUser.userName
+            userNameLabel2.text = "Hello " + objectUser.userName!.uppercaseString + " !"
             
         
             if (objectUser.profileImage != nil)

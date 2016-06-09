@@ -31,6 +31,10 @@ class ListController: UITableViewController {
         lists = (currentCategory?.getList())!
         
         
+
+        
+        
+        
         
     }
     
@@ -124,6 +128,10 @@ class ListController: UITableViewController {
         
         //cell.textLabel!.text =
         cell.textLabel!.text = item.valueForKey("listName") as! String
+        //                 listItemList = (currentList?.getListItem())!
+        cell.detailTextLabel!.text = String(item.getListItem().count)
+
+        
         
         
         

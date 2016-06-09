@@ -88,9 +88,11 @@ class AddItemController: UIViewController, UINavigationControllerDelegate, UIIma
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotoCell
         
         let img = photoList!.objectAtIndex(indexPath.row)
-        
+       
       
         cell.photoView!.image = img as? UIImage
+       
+        
         
         return cell
 

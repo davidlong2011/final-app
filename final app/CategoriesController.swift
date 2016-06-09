@@ -131,8 +131,7 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
         
         do{
             let results = try managedContext.executeFetchRequest(fetchRequest)
-            print(results)
-            print("nono")
+           
             
             let predicate = NSPredicate(format: "signedIn == %@", "1")
             
