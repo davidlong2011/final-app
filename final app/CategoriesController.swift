@@ -15,6 +15,7 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
     //var currentCategory: Category?
     var userIsLoggedIn : Bool? = false
      var managedObjectContext: NSManagedObjectContext
+    var currentUser : User?
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,27 +39,8 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext)
-        fetchRequest.entity = entityDescription
         
-        do{
-            let results = try self.managedObjectContext.executeFetchRequest(fetchRequest)
-            listCategories = results as! [Category]
-            if self.listCategories.count == 0
-            {
-                self.saveCategories("Shopping")
-                self.saveCategories("Work-out List")
-                self.saveCategories("Todo-list")
-            }
         
-            
-        }
-        catch{
-            print("error")
-        }
-
-
     }
     
     @IBAction func addCategories(sender: AnyObject) {
@@ -102,7 +84,7 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
         
         let categoriesItem = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: self.managedObjectContext) as? Category
         
-        
+        currentUser?.addCategory(categoriesItem!)
         categoriesItem!.setValue(itemToSave, forKey: "categoriesName")
         
         do{
@@ -136,8 +118,7 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
             let predicate = NSPredicate(format: "signedIn == %@", "1")
             
             let result = (results as NSArray).filteredArrayUsingPredicate(predicate)
-            print(result)
-            print("haha")
+            
             
             if (results.count > 0)
             {
@@ -147,8 +128,7 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
                    {
                     var objectUser : User = eachresult as! User
                     objectUser.setValue("0", forKey: "signedIn")
-                    print(result)
-                    print("yes")
+                   
                     }
                     
                 }
@@ -190,13 +170,14 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
             
             // Configure the cell...
-            let item = self.listCategories[indexPath.row]
+            let item = self.currentUser?.getCategories()[indexPath.row]
+            print("shit")
+            print(listCategories)
             
             
-            cell.textLabel!.text = item.valueForKey("categoriesName") as! String
+            cell.textLabel!.text = item!.valueForKey("categoriesName") as! String
         
-            
-            
+        
             return cell
     }
     
@@ -204,16 +185,41 @@ class CategoriesController: UITableViewController, setUserIsLoggedInDelegate {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Category")
+        let fetchRequest = NSFetchRequest(entityName: "User")
+        
         
         do{
             let results = try managedContext.executeFetchRequest(fetchRequest)
-            listCategories = results as! [Category]
+            print("aaaaa")
+            print(results)
+            
+            
+            let predicate = NSPredicate(format: "signedIn == %@", "1")
+            
+            let result = (results as NSArray).filteredArrayUsingPredicate(predicate)
+            
+            if (result.first != nil)
+            {
+                currentUser = result.first as! User
+                listCategories = (currentUser?.getCategories())!
+                print(listCategories)
+                print("aaaaaaa")
+                self.tableView.reloadData()
+
+            }
+            
         }
-        catch{
+            
+        catch
+        {
             print("error")
         }
-        self.tableView.reloadData()
+        
+        
+        
+        
+
+       
 
     }
     

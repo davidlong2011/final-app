@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  
 //
-//  Created by DuyLinh on 6/8/16.
+//  Created by DuyLinh on 6/10/16.
 //
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,9 +14,10 @@ import CoreData
 
 extension User {
 
+    @NSManaged var profileImage: NSData?
     @NSManaged var signedIn: String?
     @NSManaged var userName: String?
     @NSManaged var userPassword: String?
-    @NSManaged var profileImage: NSData?
+    @NSManaged var catogories: NSSet?
 
 }

@@ -25,12 +25,13 @@
         <attribute name="signedIn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userPassword" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" syncable="YES"/>
     </entity>
     <elements>
         <element name="Category" positionX="-63" positionY="-126" width="128" height="73"/>
         <element name="List" positionX="117" positionY="-144" width="128" height="88"/>
         <element name="ListItem" positionX="286" positionY="-36" width="128" height="135"/>
         <element name="Photo" positionX="52" positionY="65" width="128" height="58"/>
-        <element name="User" positionX="-270" positionY="29" width="128" height="105"/>
+        <element name="User" positionX="-245" positionY="-117" width="128" height="118"/>
     </elements>
 </model>

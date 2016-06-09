@@ -42,8 +42,8 @@ class LoginViewController: UIViewController {
             let predicate = NSPredicate(format: "signedIn == %@", "1")
             
             let result = (results as NSArray).filteredArrayUsingPredicate(predicate)
-            print(result)
-            print("haha")
+           // print(result)
+           // print("haha")
             
             if (results.count > 0)
             {
@@ -94,8 +94,7 @@ class LoginViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: "User")
-        print("checking")
-        print(fetchRequest)
+      
         
         
         do{
@@ -117,12 +116,12 @@ class LoginViewController: UIViewController {
                             self.dismissViewControllerAnimated(true, completion: nil)
                             userIsLoggedIn = true
                             self.delegate!.set(userIsLoggedIn)
-                            print(results)
-                            print(objectUser.userName)
-                            print(objectUser.userPassword)
-                            print(objectUser.signedIn)
+                           // print(results)
+                           // print(objectUser.userName)
+                           // print(objectUser.userPassword)
+                           // print(objectUser.signedIn)
                             result.first?.setValue("1", forKey: "signedIn")
-                            print(objectUser.signedIn)
+                          //  print(objectUser.signedIn)
                         }
                     else{
                         displayMyAlertMessage("Wrong Username/Password")

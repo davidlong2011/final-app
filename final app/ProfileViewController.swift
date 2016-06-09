@@ -177,10 +177,26 @@ class ProfileViewController: UIViewController,UINavigationControllerDelegate, UI
             let predicate = NSPredicate(format: "signedIn == %@", "1")
             
             let result = (results as NSArray).filteredArrayUsingPredicate(predicate)
+            print (result)
             
             var objectUser : User = result.first as! User
             
             objectUser.setValue(itemToSave, forKey: "userPassword")
+            
+            
+            
+            var myAlert = UIAlertController(title: "Confirmation", message: "Your password is sucessfully changed, Thank you!", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default)
+                {
+                    action in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            myAlert.addAction(okAction)
+            
+            self.presentViewController(myAlert, animated: true, completion: nil)
+
         }
             
         catch
